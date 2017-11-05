@@ -9,25 +9,25 @@ import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
-import org.kaikikm.threadresloader.ThreadResLoader;
+import org.kaikikm.threadresloader.ResourceLoader;
 
 import com.google.common.io.Files;
 
 public class TestThreadResLoader {
     @Test
     public void testClasspathResourceLoading() {
-        assertNotNull(ThreadResLoader.getResource("test.txt"));
+        assertNotNull(ResourceLoader.getResource("test.txt"));
         //assertNotNull(ThreadResLoader.getResource("/test.txt"));
-        assertNotNull(ThreadResLoader.getResource("testfolder"));
-        assertNotNull(ThreadResLoader.getResource("testfolder/test1.txt"));
+        assertNotNull(ResourceLoader.getResource("testfolder"));
+        assertNotNull(ResourceLoader.getResource("testfolder/test1.txt"));
     }
     
     @Test
     public void testCustomClasspathResourceLoading() throws IOException {
         File dir = Files.createTempDir();
         new File(dir.getAbsolutePath() + File.separator + "test_add.txt").createNewFile();
-        ThreadResLoader.inizializeWithCurrentThreadSettings(new URL[]{dir.toURI().toURL()});
-        assertNotNull(ThreadResLoader.getResource("test_add.txt"));
+        ResourceLoader.setURLs(new URL[]{dir.toURI().toURL()});
+        assertNotNull(ResourceLoader.getResource("test_add.txt"));
         FileUtils.deleteDirectory(dir);
     }
     
@@ -35,12 +35,12 @@ public class TestThreadResLoader {
     public void testParentThreadClasspathResourceLoading() throws IOException, InterruptedException {
         File dir = Files.createTempDir();
         new File(dir.getAbsolutePath() + File.separator + "test_add.txt").createNewFile();
-        ThreadResLoader.inizializeWithCurrentThreadSettings(new URL[]{dir.toURI().toURL()});
-        assertNotNull(ThreadResLoader.getResource("test_add.txt"));
+        ResourceLoader.setURLs(new URL[]{dir.toURI().toURL()});
+        assertNotNull(ResourceLoader.getResource("test_add.txt"));
         TestThread t = new TestThread() {
             @Override
             public void run() {
-                super.resource = ThreadResLoader.getResource("test_add.txt");;
+                super.resource = ResourceLoader.getResource("test_add.txt");;
             }
         };
         t.start();
@@ -49,23 +49,20 @@ public class TestThreadResLoader {
         t = new TestThread() {
             @Override
             public void run() {
-                ThreadResLoader.inizializeWithCurrentThreadSettings();
-                super.resource = ThreadResLoader.getResource("test_add.txt");
+                ResourceLoader.setDefault();
+                super.resource = ResourceLoader.getResource("test_add.txt");
             }
         };
         t.start();
         t.join();
         assertNull(t.getResource());
-        assertNotNull(ThreadResLoader.getResource("test_add.txt"));
+        assertNotNull(ResourceLoader.getResource("test_add.txt"));
         FileUtils.deleteDirectory(dir);
     }
     
     private class TestThread extends Thread {
         private URL resource;
-        
-        public TestThread() {
-        }
-        
+        public TestThread() { }
         public URL getResource() {
             return this.resource;
         }
