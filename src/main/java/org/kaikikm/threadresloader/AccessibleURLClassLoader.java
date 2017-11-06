@@ -4,28 +4,28 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 class AccessibleURLClassLoader extends URLClassLoader {
-    
+
     private static final URL[] EMPTY = new URL[0];
 
-    public AccessibleURLClassLoader(ClassLoader parent, URL... urls) {
+    AccessibleURLClassLoader(final ClassLoader parent, final URL... urls) {
         super(urls, parent);
     }
-    
-    public AccessibleURLClassLoader(ClassLoader parent) {
+
+    AccessibleURLClassLoader(final ClassLoader parent) {
         this(parent, EMPTY);
     }
-    
-    public AccessibleURLClassLoader(URL... urls) {
+
+    AccessibleURLClassLoader(final URL... urls) {
         this(Thread.currentThread().getContextClassLoader(), urls);
     }
-    
-    public AccessibleURLClassLoader() {
+
+    AccessibleURLClassLoader() {
         this(EMPTY);
     }
-    
+
     @Override
-    public void addURL(URL url) {
+    public void addURL(final URL url) {
         super.addURL(url);
     }
-    
+
 }
