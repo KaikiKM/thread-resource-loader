@@ -2,6 +2,7 @@ package org.kaikikm.threadresloader.test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class TestThreadResLoader {
     public void testCustomClasspathResourceLoading() throws IOException {
         final File dir = Files.createTempDir();
         final File testFile = new File(dir.getAbsolutePath() + File.separator + CREATED_FILE);
-        testFile.createNewFile();
+        assertTrue(testFile.createNewFile());
         ResourceLoader.setURLs(new URL[]{dir.toURI().toURL()});
         assertNotNull(ResourceLoader.getResource("test_add.txt"));
         FileUtils.deleteDirectory(dir);
@@ -52,7 +53,7 @@ public class TestThreadResLoader {
     @Test
     public void testParentThreadClasspathResourceLoading() throws IOException, InterruptedException {
         final File dir = Files.createTempDir();
-        new File(dir.getAbsolutePath() + File.separator + CREATED_FILE).createNewFile();
+        assertTrue(new File(dir.getAbsolutePath() + File.separator + CREATED_FILE).createNewFile());
         ResourceLoader.setURLs(new URL[]{dir.toURI().toURL()});
         assertNotNull(ResourceLoader.getResource("test_add.txt"));
         TestThread t = new TestThread() {
