@@ -58,7 +58,7 @@ public class TestThreadResLoader {
         TestThread t = new TestThread() {
             @Override
             public void run() {
-                super.resource = ResourceLoader.getResource(CREATED_FILE);
+                setResource(ResourceLoader.getResource(CREATED_FILE));
             }
         };
         t.start();
@@ -68,7 +68,7 @@ public class TestThreadResLoader {
             @Override
             public void run() {
                 ResourceLoader.setDefault();
-                super.resource = ResourceLoader.getResource(CREATED_FILE);
+                setResource(ResourceLoader.getResource(CREATED_FILE));
             }
         };
         t.start();
@@ -78,10 +78,13 @@ public class TestThreadResLoader {
         FileUtils.deleteDirectory(dir);
     }
 
-    private class TestThread extends Thread {
+    private static class TestThread extends Thread {
         private URL resource;
         public URL getResource() {
             return this.resource;
+        }
+        public void setResource(final URL resource) {
+            this.resource = resource;
         }
     }
 }
