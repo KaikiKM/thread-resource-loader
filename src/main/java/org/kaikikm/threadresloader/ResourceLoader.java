@@ -107,4 +107,13 @@ public final class ResourceLoader {
         return ResourceLoader.CLASS_LOADER.get();
     }
 
+    /**
+     * 
+     * @param name Class name
+     * @throws ClassNotFoundException 
+     */
+    public static void classForName(final String name) throws ClassNotFoundException {
+        Class.forName(name, true, ResourceLoader.CLASS_LOADER.get());
+    }
+
 }
