@@ -98,4 +98,13 @@ public final class ResourceLoader {
     public static void addURL(final URL url) {
         ResourceLoader.CLASS_LOADER.get().addURL(url);
     }
+
+    /**
+     * 
+     * @return Class loader used by the library for current thread
+     */
+    public static ClassLoader getClassLoader() {
+        return ResourceLoader.CLASS_LOADER.get();
+    }
+
 }
