@@ -6,10 +6,10 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.function.Supplier;
 
 import org.junit.Test;
 
-import com.google.common.base.Supplier;
 /**
  * 
  *
