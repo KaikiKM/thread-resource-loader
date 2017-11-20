@@ -101,7 +101,7 @@ public final class ResourceLoader {
 
     /**
      * 
-     * @return Class loader used by the library for current thread
+     * @return Class loader that library uses for current thread
      */
     public static ClassLoader getClassLoader() {
         return ResourceLoader.CLASS_LOADER.get();
