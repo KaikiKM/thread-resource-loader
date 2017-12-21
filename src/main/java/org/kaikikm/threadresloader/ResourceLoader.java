@@ -109,11 +109,13 @@ public final class ResourceLoader {
 
     /**
      * 
-     * @param name Class name
+     * @param initialize If true the class will be initialized
+     * @param name Fully qualified name of the desired class
+     * @return Class object representing the desired class
      * @throws ClassNotFoundException 
      */
-    public static void classForName(final String name) throws ClassNotFoundException {
-        Class.forName(name, true, ResourceLoader.CLASS_LOADER.get());
+    public static Class<?> classForName(final String name, final boolean initialize) throws ClassNotFoundException {
+        return Class.forName(name, initialize, ResourceLoader.CLASS_LOADER.get());
     }
 
 }
