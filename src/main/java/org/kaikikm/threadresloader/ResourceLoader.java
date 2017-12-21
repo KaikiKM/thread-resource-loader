@@ -52,7 +52,7 @@ public final class ResourceLoader {
     }
 
     /**
-     * Set current thread resource loader with parent thread resource loading settings(default {@link ResourceLoader} behavior).
+     * Set current thread resource loader with parent thread resource loading settings (default {@link ResourceLoader} behavior).
      * Adds given urls to default.
      * 
      *  @param urls Urls to add
@@ -62,7 +62,7 @@ public final class ResourceLoader {
     }
 
     /**
-     * Set current thread resource loader with parent thread resource loading settings(default {@link ResourceLoader} behavior).
+     * Set current thread resource loader with parent thread resource loading settings (default {@link ResourceLoader} behavior).
      * Adds given urls to default.
      * 
      *  @param urls Urls to add
@@ -72,7 +72,7 @@ public final class ResourceLoader {
     }
 
     /**
-     * Get a classpath resource's URL. If resource loader settings aren't previously specified it uses the parent thread settings.
+     * Get resource's URL. If resource loader settings aren't previously specified it uses the parent thread settings.
      * 
      * @param path Resource's path
      * @return Resource's URL
@@ -82,7 +82,7 @@ public final class ResourceLoader {
     }
 
     /**
-    * Get a classpath resource's URL. If resource loader settings aren't previously specified it uses the parent thread settings.
+    * Get resource's {@link InputStream}. If resource loader settings aren't previously specified it uses the parent thread settings.
     * 
     * @param path Resource's path
     * @return Resource's URL
@@ -92,7 +92,7 @@ public final class ResourceLoader {
     }
 
     /**
-     * Add url to serach resources for current thread.
+     * Add url to for resource searching for current thread.
      * @param url 
      */
     public static void addURL(final URL url) {
@@ -101,7 +101,7 @@ public final class ResourceLoader {
 
     /**
      * 
-     * @return Class loader that library uses for current thread
+     * @return Class Loader that library uses for current thread
      */
     public static ClassLoader getClassLoader() {
         return ResourceLoader.CLASS_LOADER.get();
