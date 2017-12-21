@@ -108,10 +108,26 @@ public final class ResourceLoader {
     }
 
     /**
+     * Returns the Class object associated with the class or interface with the given string name.
+     * Invoking this method is equivalent to: 
+     * <blockquote>
+     *  {@code ResourceLoader.classForName(className, true)}
+     * </blockquote>
+     * 
+     * @param name Fully qualified name of the desired class
+     * @return Class object representing the desired class
+     * @throws ClassNotFoundException 
+     */
+    public static Class<?> classForName(final String name) throws ClassNotFoundException {
+        return classForName(name, true);
+    }
+
+    /**
+     * Returns the Class object associated with the class or interface with the given string name.
      * 
      * @param initialize If true the class will be initialized
      * @param name Fully qualified name of the desired class
-     * @return Class object representing the desired class
+     * @return Class Object representing the desired class
      * @throws ClassNotFoundException 
      */
     public static Class<?> classForName(final String name, final boolean initialize) throws ClassNotFoundException {
