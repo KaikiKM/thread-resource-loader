@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.Collection;
 
 /**
- * Static class that offers a thead-dependent resource loading. Each thread has independent, configurable, runtime-modifiable classpath for resource loading.
+ * Static class that offers a thread-dependent resource loading. Each thread has independent, configurable, runtime-modifiable classpath for resource loading.
  *
  */
 public final class ResourceLoader {
@@ -33,9 +33,9 @@ public final class ResourceLoader {
 
     /**
      * Set current thread resource loader with default thread resource loading settings, specified by {@link Thread#setContextClassLoader(ClassLoader)}.
-     * Adds given urls to default.
+     * Adds given URLs to default.
      * 
-     *  @param urls Urls to add
+     *  @param urls URLs that have to be added
      */
     public static void setURLs(final URL... urls) {
         ResourceLoader.CLASS_LOADER.set(new AccessibleURLClassLoader(urls));
@@ -43,9 +43,9 @@ public final class ResourceLoader {
 
     /**
     * Set current thread resource loader with default thread resource loading settings, specified by {@link Thread#setContextClassLoader(ClassLoader)}.
-    * Adds given urls to default.
+    * Adds given URLs to default.
     * 
-    *  @param urls Urls to add
+    *  @param urls URLs that have to be added
     */
     public static void setURLs(final Collection<URL> urls) {
         setURLs(urls.toArray(new URL[urls.size()]));
@@ -53,9 +53,9 @@ public final class ResourceLoader {
 
     /**
      * Set current thread resource loader with parent thread resource loading settings (default {@link ResourceLoader} behavior).
-     * Adds given urls to default.
+     * Adds given URLs to default.
      * 
-     *  @param urls Urls to add
+     *  @param urls URLs that have to be added
      */
     public static void injectURLs(final URL... urls) {
         ResourceLoader.CLASS_LOADER.set(new AccessibleURLClassLoader(CLASS_LOADER.get(), urls));
@@ -63,9 +63,9 @@ public final class ResourceLoader {
 
     /**
      * Set current thread resource loader with parent thread resource loading settings (default {@link ResourceLoader} behavior).
-     * Adds given urls to default.
+     * Adds given URLs to default.
      * 
-     *  @param urls Urls to add
+     *  @param urls URLs that have to be added
      */
     public static void injectURLs(final Collection<URL> urls) {
         injectURLs(urls.toArray(new URL[urls.size()]));
@@ -92,7 +92,7 @@ public final class ResourceLoader {
     }
 
     /**
-     * Add url to for resource searching for current thread.
+     * Add URL to for resource searching for current thread.
      * @param url 
      */
     public static void addURL(final URL url) {
