@@ -122,7 +122,7 @@ public class TestThreadResLoader {
         Assert.assertEquals(3, method.invoke(o));
     }
 
-    private class TestThread extends Thread {
+    private static class TestThread extends Thread {
         private URL resource;
         public URL getResource() {
             return this.resource;
