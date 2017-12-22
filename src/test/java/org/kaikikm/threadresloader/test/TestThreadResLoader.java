@@ -1,8 +1,10 @@
 package org.kaikikm.threadresloader.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +14,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Assert;
 import org.junit.Test;
 import org.kaikikm.threadresloader.ResourceLoader;
 
@@ -97,7 +98,7 @@ public class TestThreadResLoader {
     public void testClassLoading() throws InstantiationException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException, MalformedURLException {
         try {
             ResourceLoader.classForName("TestClass");
-            Assert.fail();
+            fail();
         } catch (ClassNotFoundException e) { //NOPMD
         }
         /*
@@ -112,14 +113,14 @@ public class TestThreadResLoader {
         Class<?> c = ResourceLoader.classForName("it.kaikikm.test.TestClass2");
         Object o =  c.newInstance();
         Method method = c.getDeclaredMethod("testMethod");
-        Assert.assertEquals(2, method.invoke(o));
+        assertEquals(2, method.invoke(o));
         /*
          * test old class in new folder (must override old class)
          */
         c = ResourceLoader.classForName("it.kaikikm.test.TestClass");
         o = c.newInstance();
         method = c.getDeclaredMethod("testMethod");
-        Assert.assertEquals(3, method.invoke(o));
+        assertEquals(3, method.invoke(o));
     }
 
     private static class TestThread extends Thread {
