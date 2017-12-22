@@ -99,7 +99,8 @@ public class TestThreadResLoader {
         try {
             ResourceLoader.classForName("TestClass");
             fail();
-        } catch (ClassNotFoundException e) { //NOPMD
+        } catch (ClassNotFoundException e) {
+            assertNotNull(e.getMessage());
         }
         /*
          * add new folder to classpath
@@ -110,16 +111,16 @@ public class TestThreadResLoader {
         /*
          * test new class in added folder
          */
-        Class<?> c = ResourceLoader.classForName("it.kaikikm.test.TestClass2");
+        Class<?> c = ResourceLoader.classForName("it.kaikikm.dummy.TestClass2");
         Object o =  c.newInstance();
-        Method method = c.getDeclaredMethod("testMethod");
+        Method method = c.getDeclaredMethod("dummyMethod");
         assertEquals(2, method.invoke(o));
         /*
          * test old class in new folder (must override old class)
          */
-        c = ResourceLoader.classForName("it.kaikikm.test.TestClass");
+        c = ResourceLoader.classForName("it.kaikikm.dummy.TestClass");
         o = c.newInstance();
-        method = c.getDeclaredMethod("testMethod");
+        method = c.getDeclaredMethod("dummyMethod");
         assertEquals(3, method.invoke(o));
     }
 
