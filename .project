@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>thread-res-loader</name>
+	<name>thread-inheritable-resource-loader</name>
 	<comment>Project thread-res-loader created by Buildship.</comment>
 	<projects>
 	</projects>

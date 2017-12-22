@@ -1,5 +1,9 @@
 package org.kaikikm.threadresloader.test;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -38,7 +42,7 @@ public class TestThreadResLoader {
     public void testCustomClasspathResourceLoading() throws IOException {
         final File dir = Files.createTempDir();
         final File testFile = new File(dir.getAbsolutePath() + File.separator + CREATED_FILE);
-        testFile.createNewFile();
+        assertTrue(testFile.createNewFile());
         ResourceLoader.setURLs(new URL[]{dir.toURI().toURL()});
         Assert.assertNotNull(ResourceLoader.getResource("test_add.txt"));
         FileUtils.deleteDirectory(dir);
@@ -52,13 +56,13 @@ public class TestThreadResLoader {
     @Test
     public void testParentThreadClasspathResourceLoading() throws IOException, InterruptedException {
         final File dir = Files.createTempDir();
-        new File(dir.getAbsolutePath() + File.separator + CREATED_FILE).createNewFile();
+        assertTrue(new File(dir.getAbsolutePath() + File.separator + CREATED_FILE).createNewFile());
         ResourceLoader.setURLs(new URL[]{dir.toURI().toURL()});
         Assert.assertNotNull(ResourceLoader.getResource("test_add.txt"));
         TestThread t = new TestThread() {
             @Override
             public void run() {
-                super.resource = ResourceLoader.getResource(CREATED_FILE);
+                setResource(ResourceLoader.getResource(CREATED_FILE));
             }
         };
         t.start();
@@ -68,7 +72,7 @@ public class TestThreadResLoader {
             @Override
             public void run() {
                 ResourceLoader.setDefault();
-                super.resource = ResourceLoader.getResource(CREATED_FILE);
+                setResource(ResourceLoader.getResource(CREATED_FILE));
             }
         };
         t.start();
@@ -122,6 +126,9 @@ public class TestThreadResLoader {
         private URL resource;
         public URL getResource() {
             return this.resource;
+        }
+        public void setResource(final URL resource) {
+            this.resource = resource;
         }
     }
 }
