@@ -29,9 +29,9 @@ public class TestThreadResLoader {
      */
     @Test
     public void testClasspathResourceLoading() {
-        Assert.assertNotNull(ResourceLoader.getResource("test.txt"));
-        Assert.assertNotNull(ResourceLoader.getResource("testfolder"));
-        Assert.assertNotNull(ResourceLoader.getResource("testfolder/test1.txt"));
+        assertNotNull(ResourceLoader.getResource("test.txt"));
+        assertNotNull(ResourceLoader.getResource("testfolder"));
+        assertNotNull(ResourceLoader.getResource("testfolder/test1.txt"));
     }
 
     /**
@@ -44,7 +44,7 @@ public class TestThreadResLoader {
         final File testFile = new File(dir.getAbsolutePath() + File.separator + CREATED_FILE);
         assertTrue(testFile.createNewFile());
         ResourceLoader.setURLs(new URL[]{dir.toURI().toURL()});
-        Assert.assertNotNull(ResourceLoader.getResource("test_add.txt"));
+        assertNotNull(ResourceLoader.getResource("test_add.txt"));
         FileUtils.deleteDirectory(dir);
     }
 
@@ -58,7 +58,7 @@ public class TestThreadResLoader {
         final File dir = Files.createTempDir();
         assertTrue(new File(dir.getAbsolutePath() + File.separator + CREATED_FILE).createNewFile());
         ResourceLoader.setURLs(new URL[]{dir.toURI().toURL()});
-        Assert.assertNotNull(ResourceLoader.getResource("test_add.txt"));
+        assertNotNull(ResourceLoader.getResource("test_add.txt"));
         TestThread t = new TestThread() {
             @Override
             public void run() {
@@ -67,7 +67,7 @@ public class TestThreadResLoader {
         };
         t.start();
         t.join();
-        Assert.assertNotNull(t.getResource());
+        assertNotNull(t.getResource());
         t = new TestThread() {
             @Override
             public void run() {
@@ -77,8 +77,8 @@ public class TestThreadResLoader {
         };
         t.start();
         t.join();
-        Assert.assertNull(t.getResource());
-        Assert.assertNotNull(ResourceLoader.getResource(CREATED_FILE));
+        assertNull(t.getResource());
+        assertNotNull(ResourceLoader.getResource(CREATED_FILE));
         FileUtils.deleteDirectory(dir);
     }
 
@@ -105,7 +105,7 @@ public class TestThreadResLoader {
          */
         final String root = new File(ResourceLoader.getResource(".").getPath()).getParent();
         ResourceLoader.addURL(new File(root + File.separator + "externTestResources").toURI().toURL());
-        Assert.assertNotNull(ResourceLoader.getResource("dummy.txt"));
+        assertNotNull(ResourceLoader.getResource("dummy.txt"));
         /*
          * test new class in added folder
          */
