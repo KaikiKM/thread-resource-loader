@@ -123,7 +123,9 @@ public final class ResourceLoader {
     }
 
     /**
-     * Returns the Class object associated with the class or interface with the given string name.
+     * Returns the Class object associated with the class or interface with the given string name. Classes on
+     * local classpath will override classes with same name that are in the system classpath or in the parent thread
+     * classpath (reverse behavior compared to standard java {@link ClassLoader})
      * 
      * @param initialize If true the class will be initialized
      * @param name Fully qualified name of the desired class
