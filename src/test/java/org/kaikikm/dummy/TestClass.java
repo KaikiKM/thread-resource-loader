@@ -1,4 +1,4 @@
-package org.kaikikm.threadresloader.dummy;
+package org.kaikikm.dummy;
 /**
  *  Dummy class for class loading tests.
  *
@@ -8,7 +8,7 @@ public class TestClass {
      *  Dummy method.
      * @return 1
      */
-    public int dummyMethod() {
+    public int dummyMethod1() {
         return 1;
     }
 }
