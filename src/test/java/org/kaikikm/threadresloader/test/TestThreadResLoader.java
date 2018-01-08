@@ -106,8 +106,8 @@ public class TestThreadResLoader {
         /*
          * add new folder to classpath and check JAR existence
          */
-        final String root = new File(ResourceLoader.getResource(".").getPath()).getParent();
-        ResourceLoader.addURL(new File(root + File.separator + "externTestResources").toURI().toURL());
+        final File root = new File(System.getProperty("user.dir"));
+        ResourceLoader.addURL(new File(root, "externTestResources").toURI().toURL());
         assertNotNull(ResourceLoader.getResource("DummyTestClasses.jar"));
         /*
          * Add JAR
